@@ -1,0 +1,21 @@
+id: event_title
+label: Migrate event titles from the source database to Event content type
+source:
+  plugin: json_source
+  path: 'http://jsonplaceholder.typicode.com/users'
+  headers:
+    Accept: application/json
+  identifier: id
+  identifierDepth: 0
+  fields:
+    - id
+    - name
+    - username
+destination:
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: article
+  title: name
+  body: username

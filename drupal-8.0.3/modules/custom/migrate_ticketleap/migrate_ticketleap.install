@@ -1,0 +1,17 @@
+<?php
+/**
+ * @file Contains codes for migrate_ticketleap.install
+ */
+use \Drupal\migrate\Entity\Migration;
+/**
+ * Implements hook_uninstall().
+ */
+function migrate_ticketleap_uninstall(){
+    /** @var \Drupal\migrate\Entity\MigrationInterface $migration */
+    foreach(["event_title"] as $id_migration ){
+        if ($migration = Migration::load($id_migration)) {
+            $migration->getIdMap()->destroy();
+            $migration->delete();
+        }
+    }
+}
